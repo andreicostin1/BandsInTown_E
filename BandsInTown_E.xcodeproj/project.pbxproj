@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75064E2C23C6439500306EC5 /* ArtistOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75064E2B23C6439500306EC5 /* ArtistOutVC.swift */; };
+		75064E2E23C804A400306EC5 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75064E2D23C804A400306EC5 /* FavoritesVC.swift */; };
 		75F02F7023C3C2FD000CEB2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F02F6F23C3C2FD000CEB2F /* AppDelegate.swift */; };
 		75F02F7223C3C2FD000CEB2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F02F7123C3C2FD000CEB2F /* SceneDelegate.swift */; };
 		75F02F7423C3C2FD000CEB2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F02F7323C3C2FD000CEB2F /* ViewController.swift */; };
@@ -14,9 +16,13 @@
 		75F02F7A23C3C2FD000CEB2F /* BandsInTown_E.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75F02F7823C3C2FD000CEB2F /* BandsInTown_E.xcdatamodeld */; };
 		75F02F7C23C3C300000CEB2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F02F7B23C3C300000CEB2F /* Assets.xcassets */; };
 		75F02F7F23C3C300000CEB2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F02F7D23C3C300000CEB2F /* LaunchScreen.storyboard */; };
+		75F02F8723C3DEE5000CEB2F /* ArtistsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F02F8623C3DEE5000CEB2F /* ArtistsVC.swift */; };
+		75F02F8923C55A91000CEB2F /* MyCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F02F8823C55A91000CEB2F /* MyCustomCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		75064E2B23C6439500306EC5 /* ArtistOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistOutVC.swift; sourceTree = "<group>"; };
+		75064E2D23C804A400306EC5 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		75F02F6C23C3C2FD000CEB2F /* BandsInTown_E.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BandsInTown_E.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F02F6F23C3C2FD000CEB2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F02F7123C3C2FD000CEB2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +32,8 @@
 		75F02F7B23C3C300000CEB2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75F02F7E23C3C300000CEB2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75F02F8023C3C300000CEB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75F02F8623C3DEE5000CEB2F /* ArtistsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsVC.swift; sourceTree = "<group>"; };
+		75F02F8823C55A91000CEB2F /* MyCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCustomCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,10 @@
 				75F02F6F23C3C2FD000CEB2F /* AppDelegate.swift */,
 				75F02F7123C3C2FD000CEB2F /* SceneDelegate.swift */,
 				75F02F7323C3C2FD000CEB2F /* ViewController.swift */,
+				75F02F8623C3DEE5000CEB2F /* ArtistsVC.swift */,
+				75064E2B23C6439500306EC5 /* ArtistOutVC.swift */,
+				75064E2D23C804A400306EC5 /* FavoritesVC.swift */,
+				75F02F8823C55A91000CEB2F /* MyCustomCell.swift */,
 				75F02F7523C3C2FD000CEB2F /* Main.storyboard */,
 				75F02F7B23C3C300000CEB2F /* Assets.xcassets */,
 				75F02F7D23C3C300000CEB2F /* LaunchScreen.storyboard */,
@@ -141,6 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75064E2E23C804A400306EC5 /* FavoritesVC.swift in Sources */,
+				75F02F8923C55A91000CEB2F /* MyCustomCell.swift in Sources */,
+				75064E2C23C6439500306EC5 /* ArtistOutVC.swift in Sources */,
+				75F02F8723C3DEE5000CEB2F /* ArtistsVC.swift in Sources */,
 				75F02F7423C3C2FD000CEB2F /* ViewController.swift in Sources */,
 				75F02F7A23C3C2FD000CEB2F /* BandsInTown_E.xcdatamodeld in Sources */,
 				75F02F7023C3C2FD000CEB2F /* AppDelegate.swift in Sources */,
