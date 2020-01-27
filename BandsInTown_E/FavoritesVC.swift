@@ -11,17 +11,24 @@ import Foundation
 import UIKit
 import CoreData
 
+// View controller file for Favorites tab
+// **work in progress**
 class FavoritesVC: UIViewController {
+    // globals
     var send: artist?
     var favArr = [artist]()
     var people = [NSManagedObject]()
+    
+    // tableview outlet
     @IBOutlet weak var tableView: UITableView!
     
+    // view did load and setup
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()  
+        // get data from core data
         //1
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -52,8 +59,10 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let person = people[indexPath.row]
+        // construct artist from core data
         let x = artist(id: person.value(forKeyPath: "id") as! Int, name: person.value(forKeyPath: "name") as! String, tracker_count: person.value(forKeyPath: "tracker_count") as! Int, on_tour: person.value(forKeyPath: "on_tour") as! Bool, artist_url: person.value(forKeyPath: "artist_url") as! String, track_url: person.value(forKeyPath: "track_url") as! String, image_url: person.value(forKeyPath: "image_url") as! String)
         
+        // make cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MyCustomCell
         cell.setArtist(ar: x)
         return cell
@@ -67,6 +76,7 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // sending data to otehr view controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! ArtistOutVC
         vc.rec = self.send

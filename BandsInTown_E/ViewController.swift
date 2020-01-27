@@ -8,17 +8,18 @@
 
 import UIKit
 
+// View controller for select tab between favs and artists
 class ViewController: UIViewController {
     
+    // outlets for each view
     @IBOutlet weak var firstView: UIView!
     @IBOutlet weak var secondView: UIView!
     
-    
+    // view did load
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-    
+    // action for switching views
     @IBAction func switchViews(_ sender: UISegmentedControl) {
         if(sender.selectedSegmentIndex == 0) {
             firstView.alpha = 1;

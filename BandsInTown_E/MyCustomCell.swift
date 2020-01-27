@@ -13,13 +13,16 @@ import CoreData
 
 class MyCustomCell: UITableViewCell {
     
-    var isFav = false
+    // global variable of type artist to hold artist value given by listview
     var artist: artist?
     
-    
-    @IBOutlet weak var favBut: UIButton!
+    // outlets and actions
+    @IBOutlet weak var favBut: UIButton! // outlet for fav button to change in other functions
     @IBOutlet weak var label: UILabel!
+    // action for fav button
     @IBAction func fav(_ sender: UIButton) {
+        // call function to check if exists in memory or not
+        // if does, change symbol, if not, leave same
         if(saveOrDelete(ar: artist!, ac: 0)) {
             sender.setImage(UIImage(systemName: "star.fill"), for: .highlighted)
         } else {
@@ -28,10 +31,11 @@ class MyCustomCell: UITableViewCell {
     }
     @IBOutlet weak var profile: UIImageView!
     
-    
+    // function to set cell, called from listview
     func setArtist(ar: artist) {
+        // asigns value of artist to global variable
         artist = ar;
-        // pic
+        // chekc if fav or not and set image accordingly
         if(saveOrDelete(ar: artist!, ac: 1)) {
             self.favBut.setImage(UIImage(systemName: "star.fill"), for: .highlighted)
         } else {
@@ -39,9 +43,12 @@ class MyCustomCell: UITableViewCell {
         }
         
         DispatchQueue.global().async {
+            // get image for profile
             let url = URL(string: ar.image_url)
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            let data = try? Data(contentsOf: url!)
+            
             DispatchQueue.main.async{
+                // construct cell
                 self.profile.image = UIImage(data: data!)
                 self.profile.layer.cornerRadius = self.profile.frame.size.width / 2
                 self.label.text = ar.name
@@ -49,6 +56,8 @@ class MyCustomCell: UITableViewCell {
         }
     }
     
+    // function to check if fav cell exists or not
+    // **work in progress**
     func saveOrDelete(ar: artist, ac: Int) -> Bool {
         let x: FavoritesVC = FavoritesVC()
         //2
@@ -105,6 +114,7 @@ class MyCustomCell: UITableViewCell {
         return false
     }
     
+    // function to check if object exists in array, checks by value of "id"
     func cont(favArr: [NSManagedObject], fav: NSManagedObject) -> Bool{
         for f in favArr {
             if f.value(forKeyPath: "id") as! Int == fav.value(forKey: "id") as! Int {

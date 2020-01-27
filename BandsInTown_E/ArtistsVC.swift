@@ -24,20 +24,20 @@ struct artist: Decodable {
     let track_url: String
     let image_url: String
 }
+
+// view controller for artist listview from api 
 class ArtistsVC: UIViewController {
     
-    // IB
+    // outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func unwindToArtist(segue: UIStoryboardSegue) {}
     
-    
+    // globals
     var artistArr = [artist]()
-    
     var searchArtist = [artist]()
     var searching = false
-    
     var send: artist?
     
     // View did load, setup
@@ -47,21 +47,16 @@ class ArtistsVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
-        // Do any additional setup after loading the view.
     }
-    /*
-     * Function:  getData
-     * --------------------
-     * Gets data from API to for selected motor controller and fault code
-     */
     
-    /// Parses The JSON
+    // Parses The JSON
     func getData(){
-        //defines API URL with varibales
+        //defines API URL with varibales for querry API
         let urlString =  "https://search.bandsintown.com/search?query=%7B%0A%22entities%22%3A%20%5B%7B%0A%22type%22%3A%20%22artist%22%0A%7D%5D%0A%7D"
         // 1
         guard let url = URL(string: urlString) else { return }
         
+        // auth for API
         var request = URLRequest(url: url)
         request.setValue("6RLeFqUfcN6SQnnQgPCfq3OozzS6YfTI3zIuDvTd", forHTTPHeaderField: "x-api-key")
         
@@ -76,6 +71,7 @@ class ArtistsVC: UIViewController {
                 let inp = try JSONDecoder().decode(rep.self, from: data)
                 self.artistArr = inp.artists
                 DispatchQueue.main.async{
+                    // reload table after getting data
                     self.tableView.reloadData()
                 }
             } catch let jsonError {
@@ -108,7 +104,7 @@ extension ArtistsVC: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-    
+    // function for cell clicked
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if searching {
             send = searchArtist[indexPath.row]
@@ -126,23 +122,28 @@ extension ArtistsVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    // func for sending data to other VC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! ArtistOutVC
         vc.rec = self.send
     }
 }
 
+// extension for searching
 extension ArtistsVC: UISearchBarDelegate {
+    // func for search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // filtering
         searchArtist = artistArr.filter({inp -> Bool in
             guard let text = searchBar.text else {return false}
             if(text == "") {return true}
             return inp.name.contains(text)
         })
         searching = true
-        tableView.reloadData();
+        tableView.reloadData(); // reload data in listview to match search params
     }
     
+    // cancel button 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         searching = false
