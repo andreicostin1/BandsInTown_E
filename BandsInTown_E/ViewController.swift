@@ -9,10 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var firstView: UIView!
     @IBOutlet weak var secondView: UIView!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
             secondView.alpha = 1;
         }
     }
-
-
+    
+    
 }
 

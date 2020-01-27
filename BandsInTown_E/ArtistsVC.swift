@@ -31,7 +31,7 @@ class ArtistsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func unwindToArtist(segue: UIStoryboardSegue) {}
-
+    
     
     var artistArr = [artist]()
     
@@ -49,46 +49,46 @@ class ArtistsVC: UIViewController {
         searchBar.delegate = self
         // Do any additional setup after loading the view.
     }
-     /*
-         * Function:  getData
-         * --------------------
-         * Gets data from API to for selected motor controller and fault code
-         */
-
+    /*
+     * Function:  getData
+     * --------------------
+     * Gets data from API to for selected motor controller and fault code
+     */
+    
     /// Parses The JSON
     func getData(){
-    //defines API URL with varibales
+        //defines API URL with varibales
         let urlString =  "https://search.bandsintown.com/search?query=%7B%0A%22entities%22%3A%20%5B%7B%0A%22type%22%3A%20%22artist%22%0A%7D%5D%0A%7D"
-         // 1
-            guard let url = URL(string: urlString) else { return }
+        // 1
+        guard let url = URL(string: urlString) else { return }
+        
+        var request = URLRequest(url: url)
+        request.setValue("6RLeFqUfcN6SQnnQgPCfq3OozzS6YfTI3zIuDvTd", forHTTPHeaderField: "x-api-key")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
             
-            var request = URLRequest(url: url)
-            request.setValue("6RLeFqUfcN6SQnnQgPCfq3OozzS6YfTI3zIuDvTd", forHTTPHeaderField: "x-api-key")
-
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                if error != nil {
-                    print(error!.localizedDescription)
+            guard let data = data else { return }
+            do {
+                //Decode data
+                let inp = try JSONDecoder().decode(rep.self, from: data)
+                self.artistArr = inp.artists
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
                 }
-
-                guard let data = data else { return }
-                do {
-                    //Decode data
-                    let inp = try JSONDecoder().decode(rep.self, from: data)
-                    self.artistArr = inp.artists
-                    DispatchQueue.main.async{
-                        self.tableView.reloadData()
-                    }
-                } catch let jsonError {
-                    print(jsonError)
-                }
-                
-                // 5
-                }.resume()
+            } catch let jsonError {
+                print(jsonError)
+            }
+            
+            // 5
+        }.resume()
     }
 }
 // extension to set up data table
 extension ArtistsVC: UITableViewDataSource, UITableViewDelegate {
-   
+    
     // Function to get length of table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
@@ -118,10 +118,10 @@ extension ArtistsVC: UITableViewDataSource, UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else {
-             send = artistArr[indexPath.row]
-             DispatchQueue.main.async{
-               self.performSegue(withIdentifier: "showArtist", sender: nil)
-           }
+            send = artistArr[indexPath.row]
+            DispatchQueue.main.async{
+                self.performSegue(withIdentifier: "showArtist", sender: nil)
+            }
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }

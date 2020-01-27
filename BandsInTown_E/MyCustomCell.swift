@@ -12,7 +12,7 @@ import CoreData
 
 
 class MyCustomCell: UITableViewCell {
-
+    
     var isFav = false
     var artist: artist?
     
@@ -61,15 +61,15 @@ class MyCustomCell: UITableViewCell {
         } catch {
             print("fail")
         }
-       
+        
         // 2
-         let entity =
-           NSEntityDescription.entity(forEntityName: "Favorite",
-                                      in: managedContext)!
-         let favorite = NSManagedObject(entity: entity,
-                                                  insertInto: managedContext)
-         
-         // 3
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Favorite",
+                                       in: managedContext)!
+        let favorite = NSManagedObject(entity: entity,
+                                       insertInto: managedContext)
+        
+        // 3
         favorite.setValue(artist!.id, forKeyPath: "id")
         favorite.setValue(artist!.name, forKeyPath: "name")
         favorite.setValue(artist!.tracker_count, forKeyPath: "tracker_count")
@@ -77,22 +77,22 @@ class MyCustomCell: UITableViewCell {
         favorite.setValue(artist!.artist_url, forKeyPath: "artist_url")
         favorite.setValue(artist!.track_url, forKeyPath: "track_url")
         favorite.setValue(artist!.image_url, forKeyPath: "image_url")
-
+        
         if !cont(favArr: favSaved!, fav: favorite) {
-              // save if favoirte cell does not exist
+            // save if favoirte cell does not exist
             if(ac == 1) {
                 return true
             } else {
                 do {
                     try managedContext.save()
                     x.tableView.reloadData()
-                  return true
+                    return true
                 } catch let error as NSError {
-                  print("Could not save. \(error), \(error.userInfo)")
+                    print("Could not save. \(error), \(error.userInfo)")
                 }
             }
-              
-         } else {
+            
+        } else {
             if(ac == 1) {
                 return false
             } else {
@@ -101,7 +101,7 @@ class MyCustomCell: UITableViewCell {
                 x.tableView.reloadData()
                 return false
             }
-         }
+        }
         return false
     }
     

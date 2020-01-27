@@ -23,24 +23,24 @@ class FavoritesVC: UIViewController {
         tableView.delegate = self
         tableView.reloadData()  
         //1
-       guard let appDelegate =
-         UIApplication.shared.delegate as? AppDelegate else {
-           return
-       }
-       
-       let managedContext =
-         appDelegate.persistentContainer.viewContext
-       
-       //2
-       let fetchRequest =
-         NSFetchRequest<NSManagedObject>(entityName: "Favorite")
-       
-       //3
-       do {
-        people = try managedContext.fetch(fetchRequest)
-       } catch let error as NSError {
-         print("Could not fetch. \(error), \(error.userInfo)")
-       }
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Favorite")
+        
+        //3
+        do {
+            people = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
     }
 }
 
@@ -60,11 +60,11 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-             send = favArr[indexPath.row]
-             DispatchQueue.main.async{
-               self.performSegue(withIdentifier: "showArtistFromFav", sender: nil)
-           }
-            tableView.deselectRow(at: indexPath, animated: true)
+        send = favArr[indexPath.row]
+        DispatchQueue.main.async{
+            self.performSegue(withIdentifier: "showArtistFromFav", sender: nil)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
